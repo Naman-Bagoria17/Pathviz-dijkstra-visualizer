@@ -10,7 +10,7 @@
     "build-frontend": "cd frontend && npm install && npm run build",
     "start-backend": "cd backend/baceknd && npm start",
     "install": "npm run install-backend",
-    "build": "npm run build-frontend",
+    "build": "npm run install-backend && npm run build-frontend",
     "start": "npm run start-backend"
   }
 }
