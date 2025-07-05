@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: pathviz-backend
+    env: node
+    rootDir: backend/baceknd
+    buildCommand: npm install --production
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+
+  - type: static
+    name: pathviz-frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: build
+    rootDir: frontend
+    envVars:
+      - key: NODE_ENV
+        value: production

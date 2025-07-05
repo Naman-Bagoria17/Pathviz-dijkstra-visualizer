@@ -1,0 +1,130 @@
+const express = require('express');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const fs = require('fs');
+const { exec } = require('child_process');
+const path = require('path');
+
+const app = express();
+const PORT = process.env.PORT || 5000;
+
+// Middleware
+const corsOptions = {
+  origin: [
+    'http://localhost:3000',
+    'https://pathviz-frontend.onrender.com',
+    /\.onrender\.com$/
+  ],
+  credentials: true
+};
+app.use(cors(corsOptions));
+app.use(bodyParser.json());
+
+// Health check endpoint
+app.get('/', (req, res) => {
+  res.json({ message: 'Dijkstra Visualizer Backend is running!' });
+});
+
+// C++ code execution endpoint
+app.post('/api/cpp', (req, res) => {
+  const { code } = req.body;
+
+  if (!code) {
+    return res.status(400).json({
+      status: 'error',
+      message: 'No code provided'
+    });
+  }
+
+  // Create a unique filename for this request
+  const timestamp = Date.now();
+  const filename = `temp_${timestamp}`;
+  const cppFile = `${filename}.cpp`;
+  const exeFile = `${filename}.exe`;
+
+  try {
+    // Write the C++ code to a temporary file
+    fs.writeFileSync(cppFile, code);
+
+    // Compile the C++ code
+    exec(`g++ -o ${exeFile} ${cppFile}`, (compileError, compileStdout, compileStderr) => {
+      if (compileError) {
+        // Clean up the cpp file
+        try { fs.unlinkSync(cppFile); } catch (e) { }
+
+        return res.json({
+          status: 'error',
+          message: 'Compilation failed',
+          stderr: compileStderr
+        });
+      }
+
+      // Execute the compiled program (Windows compatible)
+      const runCommand = process.platform === 'win32' ? `${exeFile}` : `./${exeFile}`;
+      exec(runCommand, { timeout: 5000 }, (runError, runStdout, runStderr) => {
+        // Clean up temporary files
+        try {
+          fs.unlinkSync(cppFile);
+          fs.unlinkSync(exeFile);
+        } catch (e) { }
+
+        if (runError) {
+          if (runError.killed) {
+            return res.json({
+              status: 'error',
+              message: 'Program execution timed out',
+              stderr: 'Execution timed out after 5 seconds'
+            });
+          }
+
+          return res.json({
+            status: 'error',
+            message: 'Runtime error',
+            stderr: runStderr || runError.message
+          });
+        }
+
+        res.json({
+          status: 'success',
+          stdout: runStdout,
+          stderr: runStderr
+        });
+      });
+    });
+
+  } catch (error) {
+    // Clean up any files that might have been created
+    try {
+      fs.unlinkSync(cppFile);
+      fs.unlinkSync(exeFile);
+    } catch (e) { }
+
+    res.status(500).json({
+      status: 'error',
+      message: 'Internal server error',
+      stderr: error.message
+    });
+  }
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({
+    status: 'error',
+    message: 'Something went wrong!'
+  });
+});
+
+// 404 handler
+app.use((req, res) => {
+  res.status(404).json({
+    status: 'error',
+    message: 'Endpoint not found'
+  });
+});
+
+app.listen(PORT, () => {
+  console.log(`🚀 Server is running on port ${PORT}`);
+  console.log(`📡 API endpoints available at http://localhost:${PORT}/api/`);
+});
