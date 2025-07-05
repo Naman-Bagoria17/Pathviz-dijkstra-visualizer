@@ -45,7 +45,7 @@ function App() {
 
       <footer className="modern-footer">
         <div className="footer-content">
-          <p>&copy; 2024 PathViz - Advanced Shortest Path Visualization</p>
+          <p>&copy; 2025 PathViz - Advanced Shortest Path Visualization</p>
           <div className="footer-links">
             <span>Built with React & Modern Web Technologies</span>
           </div>
