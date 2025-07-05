@@ -1,5 +1,3 @@
-/* Navbar.css */
-
 .modern-navbar {
   position: fixed;
   top: 0;
@@ -88,11 +86,10 @@
 }
 
 .navbar-controls {
-  display: none;
+  display: flex;
   align-items: center;
 }
 
-/* Hamburger Menu Button */
 .menu-toggle {
   display: none;
   flex-direction: column;
@@ -111,19 +108,6 @@
   transition: all 0.3s ease;
 }
 
-/* Animate Menu Icon When Open */
-.menu-toggle.active span:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
-}
-
-.menu-toggle.active span:nth-child(2) {
-  opacity: 0;
-}
-
-.menu-toggle.active span:nth-child(3) {
-  transform: rotate(-45deg) translate(5px, -5px);
-}
-
 @keyframes pulse {
 
   0%,
@@ -136,33 +120,31 @@
   }
 }
 
-/* ----------- Mobile Styles ----------- */
+/* Mobile Responsive */
 @media (max-width: 768px) {
   .navbar-container {
     padding: 0 1rem;
   }
 
   .navbar-menu {
-    position: absolute;
-    top: 100%;
+    position: fixed;
+    top: 80px;
     left: 0;
     right: 0;
     background: var(--bg-secondary);
     backdrop-filter: blur(20px);
-    border-top: 1px solid var(--glass-border);
+    border-bottom: 1px solid var(--glass-border);
     flex-direction: column;
-    padding: 1rem 0;
-    gap: 0.5rem;
-    transform: translateY(-20px);
+    padding: 2rem;
+    gap: 1rem;
+    transform: translateY(-100%);
     opacity: 0;
-    pointer-events: none;
     transition: all 0.3s ease;
   }
 
   .navbar-menu.active {
     transform: translateY(0);
     opacity: 1;
-    pointer-events: auto;
   }
 
   .navbar-item {
@@ -171,11 +153,19 @@
     padding: 1rem;
   }
 
-  .navbar-controls {
+  .menu-toggle {
     display: flex;
   }
 
-  .menu-toggle {
-    display: flex;
+  .menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+  }
+
+  .menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
   }
 }
