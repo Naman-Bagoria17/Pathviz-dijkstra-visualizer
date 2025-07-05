@@ -3,5 +3,14 @@
   "version": "1.0.0",
   "private": true,
   "license": "MIT",
-  "description": "Dijkstra Algorithm Visualizer - Multi-service deployment"
+  "description": "Dijkstra Algorithm Visualizer - Multi-service deployment",
+  "scripts": {
+    "install-frontend": "cd frontend && npm install",
+    "install-backend": "cd backend/baceknd && npm install",
+    "build-frontend": "cd frontend && npm run build",
+    "start-backend": "cd backend/baceknd && npm start",
+    "install": "npm run install-frontend && npm run install-backend",
+    "build": "npm run build-frontend",
+    "start": "npm run start-backend"
+  }
 }
