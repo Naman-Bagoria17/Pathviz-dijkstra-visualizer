@@ -3,8 +3,8 @@ services:
     name: pathviz-backend
     env: node
     rootDir: backend/baceknd
-    buildCommand: npm install --production
-    startCommand: node server.js
+    buildCommand: npm install
+    startCommand: npm start
     envVars:
       - key: NODE_ENV
         value: production
@@ -13,9 +13,15 @@ services:
 
   - type: static
     name: pathviz-frontend
+    env: static
+    rootDir: frontend
     buildCommand: npm install && npm run build
     staticPublishPath: build
-    rootDir: frontend
     envVars:
       - key: NODE_ENV
         value: production
+      - key: REACT_APP_BACKEND_URL
+        fromService:
+          type: web
+          name: pathviz-backend
+          property: host
