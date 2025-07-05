@@ -70,6 +70,8 @@ const VisualizerPage = () => {
     setGrid(newGrid);
   }, [grid, isRunning]);
 
+
+
   const handleMouseDown = (row, col) => {
     if (isRunning) return;
     setIsMousePressed(true);
@@ -386,6 +388,8 @@ const VisualizerPage = () => {
             >
               Clear Walls
             </button>
+
+
           </div>
         </div>
 
