@@ -20,8 +20,8 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
-// Health check endpoint
-app.get('/', (req, res) => {
+// Health check endpoint (only for development)
+app.get('/api/health', (req, res) => {
   res.json({ message: 'Dijkstra Visualizer Backend is running!' });
 });
 
@@ -116,14 +116,20 @@ app.use((err, req, res, next) => {
   });
 });
 
-// Serve static files from React build (only in production)
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../../frontend/build')));
+// Serve static files from React build
+const frontendBuildPath = path.join(__dirname, '../../frontend/build');
+console.log('Looking for frontend build at:', frontendBuildPath);
+
+// Check if build directory exists
+if (fs.existsSync(frontendBuildPath)) {
+  console.log('✅ Frontend build directory found');
+  app.use(express.static(frontendBuildPath));
 
   // Serve React app for all non-API routes
   app.get('*', (req, res) => {
     if (!req.path.startsWith('/api')) {
-      res.sendFile(path.join(__dirname, '../../frontend/build/index.html'));
+      console.log('Serving React app for path:', req.path);
+      res.sendFile(path.join(frontendBuildPath, 'index.html'));
     } else {
       res.status(404).json({
         status: 'error',
@@ -132,12 +138,22 @@ if (process.env.NODE_ENV === 'production') {
     }
   });
 } else {
-  // 404 handler for development
-  app.use((req, res) => {
-    res.status(404).json({
-      status: 'error',
-      message: 'Endpoint not found'
-    });
+  console.log('❌ Frontend build directory not found at:', frontendBuildPath);
+
+  // Fallback route when no build directory
+  app.get('*', (req, res) => {
+    if (!req.path.startsWith('/api')) {
+      res.json({
+        message: 'Frontend build not found. Please run: npm run build',
+        buildPath: frontendBuildPath,
+        exists: fs.existsSync(frontendBuildPath)
+      });
+    } else {
+      res.status(404).json({
+        status: 'error',
+        message: 'API endpoint not found'
+      });
+    }
   });
 }
 
