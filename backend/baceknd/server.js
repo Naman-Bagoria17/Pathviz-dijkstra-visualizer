@@ -116,15 +116,35 @@ app.use((err, req, res, next) => {
   });
 });
 
-// 404 handler
-app.use((req, res) => {
-  res.status(404).json({
-    status: 'error',
-    message: 'Endpoint not found'
+// Serve static files from React build (only in production)
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../../frontend/build')));
+
+  // Serve React app for all non-API routes
+  app.get('*', (req, res) => {
+    if (!req.path.startsWith('/api')) {
+      res.sendFile(path.join(__dirname, '../../frontend/build/index.html'));
+    } else {
+      res.status(404).json({
+        status: 'error',
+        message: 'API endpoint not found'
+      });
+    }
   });
-});
+} else {
+  // 404 handler for development
+  app.use((req, res) => {
+    res.status(404).json({
+      status: 'error',
+      message: 'Endpoint not found'
+    });
+  });
+}
 
 app.listen(PORT, () => {
   console.log(`🚀 Server is running on port ${PORT}`);
   console.log(`📡 API endpoints available at http://localhost:${PORT}/api/`);
+  if (process.env.NODE_ENV === 'production') {
+    console.log(`🌐 Frontend served at http://localhost:${PORT}/`);
+  }
 });
