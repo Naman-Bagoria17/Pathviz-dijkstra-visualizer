@@ -19,6 +19,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 2rem;
+  position: relative;
 }
 
 .navbar-brand {
@@ -88,8 +89,102 @@
 }
 
 .navbar-controls {
-  display: none;
+  display: flex;
   align-items: center;
+  gap: 0.5rem;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  margin-left: 1rem;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-toggle:hover {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+}
+
+.theme-toggle-track {
+  width: 48px;
+  height: 24px;
+  background: var(--bg-tertiary);
+  border-radius: 12px;
+  position: relative;
+  transition: all 0.3s ease;
+  border: 1px solid var(--glass-border);
+}
+
+.theme-toggle-thumb {
+  width: 20px;
+  height: 20px;
+  background: var(--text-primary);
+  border-radius: 50%;
+  position: absolute;
+  top: 1px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.theme-toggle-thumb.dark {
+  left: 1px;
+  background: var(--bg-primary);
+  border: 1px solid var(--glass-border);
+}
+
+.theme-toggle-thumb.light {
+  left: 25px;
+  background: var(--accent-primary);
+}
+
+.theme-icon {
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.theme-toggle-thumb.light .theme-icon {
+  color: white;
+}
+
+/* Light theme navbar enhancements */
+[data-theme="light"] .modern-navbar {
+  background: rgba(250, 251, 252, 0.95);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+[data-theme="light"] .theme-toggle-track {
+  background: rgba(226, 232, 240, 0.8);
+  border: 1px solid rgba(148, 163, 184, 0.3);
+}
+
+[data-theme="light"] .theme-toggle:hover {
+  background: rgba(248, 250, 252, 0.8);
+}
+
+[data-theme="light"] .navbar-item {
+  color: var(--text-primary);
+}
+
+[data-theme="light"] .navbar-item:hover {
+  color: var(--accent-primary);
+}
+
+[data-theme="light"] .navbar-item.active {
+  color: var(--accent-primary);
 }
 
 /* Hamburger Menu Button */
@@ -173,6 +268,26 @@
 
   .navbar-controls {
     display: flex;
+    gap: 0.25rem;
+  }
+
+  .theme-toggle {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+
+  .theme-toggle-track {
+    width: 44px;
+    height: 22px;
+  }
+
+  .theme-toggle-thumb {
+    width: 18px;
+    height: 18px;
+  }
+
+  .theme-toggle-thumb.light {
+    left: 23px;
   }
 
   .menu-toggle {

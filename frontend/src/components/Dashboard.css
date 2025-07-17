@@ -155,6 +155,7 @@
   border: 1px solid var(--glass-border);
   border-radius: 12px;
   backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-primary);
 }
 
 .algorithm-explanation h3 {
@@ -202,6 +203,7 @@
   border: 1px solid var(--glass-border);
   border-radius: 12px;
   backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-primary);
 }
 
 .algorithm-features h3 {
@@ -325,4 +327,33 @@
   .section-title {
     font-size: 2rem;
   }
+}
+
+/* Light Theme Specific Dashboard Styles */
+[data-theme="light"] .feature-item {
+  background: rgba(59, 130, 246, 0.05);
+  border-left: 4px solid var(--accent-primary);
+}
+
+[data-theme="light"] .algorithm-steps {
+  background: rgba(59, 130, 246, 0.08);
+  border-left: 4px solid var(--accent-primary);
+}
+
+[data-theme="light"] .dijkstra-content .algorithm-explanation,
+[data-theme="light"] .dijkstra-content .algorithm-features {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+/* Enhanced readability for light theme */
+[data-theme="light"] .algorithm-explanation p,
+[data-theme="light"] .feature-desc {
+  color: #475569;
+  line-height: 1.7;
+}
+
+[data-theme="light"] .feature-complexity {
+  background: rgba(59, 130, 246, 0.1);
+  color: #1e40af;
 }

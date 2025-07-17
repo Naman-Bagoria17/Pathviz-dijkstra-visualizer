@@ -1,21 +1,40 @@
 import React, { useEffect, useRef } from 'react';
+import { useTheme } from '../contexts/ThemeContext';
 import './ParticleBackground.css';
 
 const ParticleBackground = () => {
   const canvasRef = useRef(null);
   const animationRef = useRef(null);
   const particlesRef = useRef([]);
+  const { isDark } = useTheme();
 
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
-    
+
+    // Theme-aware colors
+    const getParticleColor = (opacity) => {
+      if (isDark) {
+        return `rgba(0, 212, 255, ${opacity})`;
+      } else {
+        return `rgba(45, 45, 45, ${opacity * 1.2})`;
+      }
+    };
+
+    const getConnectionColor = (opacity) => {
+      if (isDark) {
+        return `rgba(0, 212, 255, ${opacity})`;
+      } else {
+        return `rgba(60, 60, 60, ${opacity * 1.0})`;
+      }
+    };
+
     // Set canvas size
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     };
-    
+
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
@@ -44,7 +63,7 @@ const ParticleBackground = () => {
       draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(0, 212, 255, ${this.opacity})`;
+        ctx.fillStyle = getParticleColor(this.opacity);
         ctx.fill();
       }
     }
@@ -53,7 +72,7 @@ const ParticleBackground = () => {
     const createParticles = () => {
       const particleCount = Math.floor((canvas.width * canvas.height) / 15000);
       particlesRef.current = [];
-      
+
       for (let i = 0; i < particleCount; i++) {
         particlesRef.current.push(new Particle());
       }
@@ -62,7 +81,7 @@ const ParticleBackground = () => {
     // Draw connections between nearby particles
     const drawConnections = () => {
       const maxDistance = 100;
-      
+
       for (let i = 0; i < particlesRef.current.length; i++) {
         for (let j = i + 1; j < particlesRef.current.length; j++) {
           const dx = particlesRef.current[i].x - particlesRef.current[j].x;
@@ -74,7 +93,7 @@ const ParticleBackground = () => {
             ctx.beginPath();
             ctx.moveTo(particlesRef.current[i].x, particlesRef.current[i].y);
             ctx.lineTo(particlesRef.current[j].x, particlesRef.current[j].y);
-            ctx.strokeStyle = `rgba(0, 212, 255, ${opacity})`;
+            ctx.strokeStyle = getConnectionColor(opacity);
             ctx.lineWidth = 1;
             ctx.stroke();
           }
@@ -85,16 +104,16 @@ const ParticleBackground = () => {
     // Animation loop
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
+
       // Update and draw particles
       particlesRef.current.forEach(particle => {
         particle.update();
         particle.draw();
       });
-      
+
       // Draw connections
       drawConnections();
-      
+
       animationRef.current = requestAnimationFrame(animate);
     };
 
@@ -108,7 +127,7 @@ const ParticleBackground = () => {
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, []);
+  }, [isDark]);
 
   return (
     <canvas

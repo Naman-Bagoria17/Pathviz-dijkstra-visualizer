@@ -179,7 +179,7 @@ body {
 
 .glass-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  box-shadow: var(--shadow-secondary);
 }
 
 /* Modern Button Styles */
@@ -327,4 +327,53 @@ body {
     width: 20px;
     height: 20px;
   }
+}
+
+/* Light Theme Specific Enhancements */
+[data-theme="light"] .modern-navbar,
+body:has(.theme-toggle-thumb.light) .modern-navbar {
+  background: rgba(250, 251, 252, 0.95);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+[data-theme="light"] .glass-card,
+body:has(.theme-toggle-thumb.light) .glass-card {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.06);
+}
+
+[data-theme="light"] .glass-card:hover,
+body:has(.theme-toggle-thumb.light) .glass-card:hover {
+  box-shadow: 0 12px 40px rgba(15, 23, 42, 0.1);
+}
+
+[data-theme="light"] .modern-btn.secondary,
+body:has(.theme-toggle-thumb.light) .modern-btn.secondary {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  color: var(--text-primary);
+}
+
+[data-theme="light"] .modern-btn.secondary:hover,
+body:has(.theme-toggle-thumb.light) .modern-btn.secondary:hover {
+  background: rgba(255, 255, 255, 1);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+/* Enhanced light theme text contrast */
+[data-theme="light"] .hero-subtitle,
+body:has(.theme-toggle-thumb.light) .hero-subtitle {
+  color: #475569;
+}
+
+[data-theme="light"] .algorithm-description,
+body:has(.theme-toggle-thumb.light) .algorithm-description {
+  color: #64748b;
+}
+
+/* Light theme particle background adjustment */
+[data-theme="light"] .particle-background,
+body:has(.theme-toggle-thumb.light) .particle-background {
+  opacity: 0.3;
 }

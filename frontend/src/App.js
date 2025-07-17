@@ -6,6 +6,7 @@ import Dashboard from "./components/Dashboard";
 import VisualizerPage from "./components/VisualizerPage";
 import CodePlayground from "./components/CodePlayground";
 import ParticleBackground from "./components/ParticleBackground";
+import { ThemeProvider } from "./contexts/ThemeContext";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -31,27 +32,29 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <ParticleBackground />
-      <Navbar />
+    <ThemeProvider>
+      <div className="App">
+        <ParticleBackground />
+        <Navbar />
 
-      <main className="main-content">
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/visualizer" element={<VisualizerPage />} />
-          <Route path="/playground" element={<CodePlayground />} />
-        </Routes>
-      </main>
+        <main className="main-content">
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/visualizer" element={<VisualizerPage />} />
+            <Route path="/playground" element={<CodePlayground />} />
+          </Routes>
+        </main>
 
-      <footer className="modern-footer">
-        <div className="footer-content">
-          <p>&copy; 2025 PathViz - Advanced Shortest Path Visualization</p>
-          <div className="footer-links">
-            <span>Built with React & Modern Web Technologies</span>
+        <footer className="modern-footer">
+          <div className="footer-content">
+            <p>&copy; 2025 PathViz - Advanced Shortest Path Visualization</p>
+            <div className="footer-links">
+              <span>Built with React & Modern Web Technologies</span>
+            </div>
           </div>
-        </div>
-      </footer>
-    </div>
+        </footer>
+      </div>
+    </ThemeProvider>
   );
 }
 
