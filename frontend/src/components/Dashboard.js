@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import VizstraLogo from './VizstraLogo';
 import './Dashboard.css';
 
 const Dashboard = () => {
@@ -57,6 +58,9 @@ const Dashboard = () => {
         {/* Hero Section */}
         <section className="hero-section">
           <div className="hero-content">
+            <div className="hero-logo">
+              <VizstraLogo size={64} showText={false} />
+            </div>
             <h1 className="hero-title">
               Dijkstra's Algorithm
               <span className="gradient-text"> Visualizer</span>

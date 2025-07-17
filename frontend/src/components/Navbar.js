@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useTheme } from "../contexts/ThemeContext";
+import VizstraLogo from "./VizstraLogo";
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -19,7 +20,7 @@ const Navbar = () => {
       <div className="navbar-container">
         {/* brand */}
         <Link to="/" className="navbar-brand" onClick={() => setIsMenuOpen(false)}>
-          <span className="brand-text">PathViz</span>
+          <VizstraLogo size={28} showText={true} />
         </Link>
 
         {/* links – desktop AND the slide‑down on mobile */}

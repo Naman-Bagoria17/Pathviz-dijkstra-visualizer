@@ -1,4 +1,4 @@
-# PathViz
+# Vizstra
 
 A web application for visualizing Dijkstra's shortest path algorithm.
 
@@ -20,8 +20,8 @@ A web application for visualizing Dijkstra's shortest path algorithm.
 
 1. Clone the repository
    ```bash
-   git clone https://github.com/Naman-Bagoria17/Pathviz-dijkstra-visualizer.git
-   cd Pathviz-dijkstra-visualizer
+   git clone https://github.com/Naman-Bagoria17/Vizstra-dijkstra-visualizer.git
+   cd Vizstra-dijkstra-visualizer
    ```
 
 2. Install dependencies

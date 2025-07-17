@@ -13,13 +13,13 @@ export const useTheme = () => {
 export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(() => {
     // Check localStorage for saved theme preference
-    const savedTheme = localStorage.getItem('pathviz-theme');
+    const savedTheme = localStorage.getItem('vizstra-theme');
     return savedTheme || 'dark';
   });
 
   useEffect(() => {
     // Save theme preference to localStorage
-    localStorage.setItem('pathviz-theme', theme);
+    localStorage.setItem('vizstra-theme', theme);
 
     // Apply theme to document root and body
     const root = document.documentElement;

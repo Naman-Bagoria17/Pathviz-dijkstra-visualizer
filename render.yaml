@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: pathviz-backend
+    name: vizstra-backend
     env: node
     rootDir: backend/baceknd
     buildCommand: npm install
@@ -12,7 +12,7 @@ services:
         value: 10000
 
   - type: static
-    name: pathviz-frontend
+    name: vizstra-frontend
     env: static
     rootDir: frontend
     buildCommand: npm install && npm run build
@@ -23,5 +23,5 @@ services:
       - key: REACT_APP_BACKEND_URL
         fromService:
           type: web
-          name: pathviz-backend
+          name: vizstra-backend
           property: host

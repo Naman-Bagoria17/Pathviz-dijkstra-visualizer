@@ -24,7 +24,7 @@ function App() {
       <div className="loading-screen">
         <div className="loading-container">
           <div className="loading-spinner"></div>
-          <h2 className="loading-text">PathViz</h2>
+          <h2 className="loading-text">Vizstra</h2>
           <p className="loading-subtitle">Initializing Dijkstra's Algorithm Visualizer...</p>
         </div>
       </div>
@@ -47,7 +47,7 @@ function App() {
 
         <footer className="modern-footer">
           <div className="footer-content">
-            <p>&copy; 2025 PathViz - Advanced Shortest Path Visualization</p>
+            <p>&copy; 2025 Vizstra - Advanced Shortest Path Visualization</p>
             <div className="footer-links">
               <span>Built with React & Modern Web Technologies</span>
             </div>
