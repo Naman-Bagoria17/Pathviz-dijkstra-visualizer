@@ -171,6 +171,106 @@
   margin-top: 2rem;
 }
 
+/* Responsive layout for Dijkstra Algorithm Features section */
+@media (max-width: 1024px) {
+  .dijkstra-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .dijkstra-content {
+    gap: 1.5rem;
+  }
+
+  .algorithm-explanation,
+  .algorithm-features {
+    padding: 1.5rem;
+  }
+
+  .algorithm-explanation h3,
+  .algorithm-features h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .features-list {
+    gap: 1rem;
+  }
+
+  .feature-item {
+    padding: 1rem;
+  }
+
+  .feature-header h4 {
+    font-size: 1rem;
+  }
+
+  .feature-complexity {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .dijkstra-content {
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .algorithm-explanation,
+  .algorithm-features {
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  .algorithm-explanation h3,
+  .algorithm-features h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .algorithm-explanation p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .feature-item {
+    padding: 0.75rem;
+  }
+
+  .feature-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .feature-desc {
+    font-size: 0.85rem;
+  }
+
+  .algorithm-steps {
+    padding: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .algorithm-steps h4 {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .algorithm-steps ol {
+    padding-left: 1rem;
+  }
+
+  .algorithm-steps li {
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+  }
+}
+
 .algorithm-explanation {
   padding: 2rem;
   background: var(--glass-bg);
