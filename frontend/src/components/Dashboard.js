@@ -80,21 +80,50 @@ const Dashboard = () => {
         {/* Dijkstra Features Section */}
         <section className="algorithms-section">
           <h2 className="section-title">Dijkstra's Algorithm Features</h2>
-          <div className="algorithms-grid">
-            {dijkstraFeatures.map((feature, index) => (
-              <div
-                key={feature.name}
-                className={`algorithm-card glass-card ${currentAlgorithm === feature.name ? 'active' : ''}`}
-                onClick={() => setCurrentAlgorithm(feature.name)}
-              >
-                <h3 className="algorithm-name" style={{ color: feature.color }}>{feature.name}</h3>
-                <p className="algorithm-description">{feature.description}</p>
-                <div className="algorithm-complexity">
-                  <span>Key Aspect: </span>
-                  <code>{feature.complexity}</code>
-                </div>
+          <div className="dijkstra-content">
+            {/* Left side - Algorithm explanation */}
+            <div className="algorithm-explanation">
+              <h3>About Dijkstra's Algorithm</h3>
+              <p>
+                Dijkstra's algorithm is a graph traversal algorithm that finds the shortest path
+                between nodes in a weighted graph. Developed by Edsger W. Dijkstra in 1956,
+                it uses a greedy approach to systematically explore nodes, always choosing
+                the unvisited node with the smallest known distance from the source.
+              </p>
+              <p>
+                The algorithm maintains a priority queue of nodes and continuously selects
+                the node with minimum distance, updating the distances to its neighbors.
+                This process guarantees finding the optimal shortest path in graphs with
+                non-negative edge weights.
+              </p>
+
+              <div className="algorithm-steps">
+                <h4>Key Steps:</h4>
+                <ol>
+                  <li>Initialize distances: set source to 0, all others to infinity</li>
+                  <li>Add all vertices to a priority queue</li>
+                  <li>While queue is not empty, extract vertex with minimum distance</li>
+                  <li>Update distances to all adjacent vertices</li>
+                  <li>Repeat until destination is reached or queue is empty</li>
+                </ol>
               </div>
-            ))}
+            </div>
+
+            {/* Right side - Key features */}
+            <div className="algorithm-features">
+              <h3>Key Features</h3>
+              <div className="features-list">
+                {dijkstraFeatures.map((feature, index) => (
+                  <div key={feature.name} className="feature-item">
+                    <div className="feature-header">
+                      <h4 style={{ color: feature.color }}>{feature.name}</h4>
+                      <span className="feature-complexity">{feature.complexity}</span>
+                    </div>
+                    <p className="feature-desc">{feature.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
