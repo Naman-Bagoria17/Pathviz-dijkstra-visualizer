@@ -2,6 +2,9 @@
 
 A web application for visualizing Dijkstra's shortest path algorithm.
 
+## 🚀 Live Demo
+[**Try Vizstra Live**](https://pathviz-dijkstra-visualizer-26.onrender.com)
+
 ## Features
 
 - Interactive grid visualization
